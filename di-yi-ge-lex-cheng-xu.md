@@ -56,11 +56,23 @@ int yywrap()
 
 ## 需要的例子文件example.txt （放在相同文件夹）：
 
-
-
 ```
 did I have fun?
 ```
+
+ lex word.l 
+
+  gcc -o w lex.yy.c 
+
+./w
+
+did: is a verb
+
+I: is not a verb
+
+have: is a verb
+
+fun: is not a verb
 
 
 
