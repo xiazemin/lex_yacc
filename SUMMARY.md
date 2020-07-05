@@ -15,4 +15,5 @@
 * [ANSI C Yacc grammar](ansi-c-yacc-grammar.md)
 * [lex and yacc](lex-and-yacc.md)
 * [yacc概述](yaccgai-shu.md)
+* [Lex理论](lexli-lun.md)
 
