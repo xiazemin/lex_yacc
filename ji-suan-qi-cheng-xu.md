@@ -42,9 +42,15 @@ int yyerror(char *s)
 }
 ```
 
-$lex num.l 
+$lex num.l
 
-$bison -d num.y 
+$bison -d num.y
+
+$ls
+
+lex.yy.c        num.tab.c       num.y
+
+num.l           num.tab.h
 
 
 
