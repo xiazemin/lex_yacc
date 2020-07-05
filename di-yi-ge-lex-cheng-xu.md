@@ -36,23 +36,30 @@ could |
 has |
 have |
 had |
-go		{printf("%s: is a verb\n",yytext);}
-[a-zA-Z]+		{printf("%s: is not a verb\n",yytext);}
+go        {printf("%s: is a verb\n",yytext);}
+[a-zA-Z]+        {printf("%s: is not a verb\n",yytext);}
 
-.|\n		{ECHO;/*通常的默认状态：输出匹配模式，复制标点或其它字符*/}
+.|\n        {ECHO;/*通常的默认状态：输出匹配模式，复制标点或其它字符*/}
 %%
 
 int main()
 {
-	yyin = fopen("example.txt","r");
-		yylex();
-	fclose(yyin);
+    yyin = fopen("example.txt","r");
+        yylex();
+    fclose(yyin);
 }
 int yywrap()
 {
-	return 1;
+    return 1;
 }
+```
 
+## 需要的例子文件example.txt （放在相同文件夹）：
+
+
+
+```
+did I have fun?
 ```
 
 
