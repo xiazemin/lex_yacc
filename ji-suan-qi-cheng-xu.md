@@ -73,15 +73,24 @@ clang: error: linker command failed with exit code 1 (use -v to see invocation)
 
 $ gcc lex.yy.c -o n -v
 
-
-
 ```
 End of search list.
  "/Library/Developer/CommandLineTools/usr/bin/ld" -demangle -dynamic -arch x86_64 -macosx_version_min 10.11.0 -o n /var/folders/r9/35q9g3d56_d9g0v59w9x2l9w0000gn/T/lex-ae1cef.o -lSystem /Library/Developer/CommandLineTools/usr/bin/../lib/clang/8.0.0/lib/darwin/libclang_rt.osx.a
 Undefined symbols for architecture x86_64:
   "_main", referenced from:
      implicit entry/start for main executable
+```
 
+解决办法
+
+```
+%{
+#include <stdio.h>
+#include "lex.yy.c"
+int yyparse(void);
+int yyerror(const char* msg);
+int yywrap();
+}%
 ```
 
 
