@@ -123,9 +123,21 @@ int yywrap()
 }
 ```
 
-$lex table.l 
+$lex table.l
 
-$gcc -o t lex.yy.c 
+$gcc -o t lex.yy.c
+
+$./t&lt;../exp1/example.txt 
+
+did: don't recognize
+
+ I: don't recognize
+
+ have: don't recognize
+
+ fun: don't recognize
+
+
 
 程序代码说明：
 
