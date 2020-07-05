@@ -10,4 +10,5 @@
 * [环境配置另一种方式](huan-jing-pei-zhi-ling-yi-zhong-fang-shi.md)
 * [变量和有类型的标记](bian-liang-he-you-lei-xing-de-biao-ji.md)
 * [Yacc语法](yaccyu-fa.md)
+* [Yacc库](yaccku.md)
 
