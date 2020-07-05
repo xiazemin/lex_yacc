@@ -113,5 +113,11 @@ clang: error: linker command failed with exit code 1 (use -v to see invocation)
 
 问题解决
 
+```
+flex num.l 
+bison -d  num.y 
+gcc num.tab.c  lex.yy.c -o n
+```
+
 
 
