@@ -74,7 +74,7 @@ return 1;
 }
 ```
 
-**          
+**            
 **
 
 **Lex 变量**
@@ -102,7 +102,7 @@ return 1;
 * yymore\(\)
    这一函数告诉 Lexer 将下一个标记附加到当前标记后。
 
-**          
+**            
 **
 
 个人使用心得：
@@ -123,7 +123,7 @@ return 1;
 > > >
 > > > UTF2    = %xC2-DF UTF0  --&gt; UTF2    \[\xC2-\xDF\]{UTF0}
 
-**          
+**            
 **
 
 **二、yacc\(Yet Another Compiler Compiler\)，是一个经典的生成语法分析器的工具**
@@ -148,6 +148,7 @@ return 1;
 * %union  --- 定义yystype
 
 * %left
+
 * %right
 * %noassoc
 
@@ -187,7 +188,7 @@ int yywrap(){
 
 _要求%%，%{，%}必须顶格对齐_
 
-_当yacc发现一个解析错误，默认动作是调用yyerror          
+_当yacc发现一个解析错误，默认动作是调用yyerror            
 _
 
 _定义三个token，在lex中被return。_
@@ -312,130 +313,56 @@ extern YYSTYPE yylval;
 
 _删除了yylval声明_
 
-_          
+_            
 _
 
-_          
+_            
 _
 
 ```
 %{
-
-#
-include
- "y.tab.h"
-#
-include
-<
-stdio.h
->
-#
-include
-<
-string.h
->
-
+        #include "y.tab.h"
+        #include <stdio.h>
+        #include <string.h>
 %}
-
-char
- [A-Za-z]
-num [
-0
--
-9
-]
+char [A-Za-z]
+num [0-9]
 eq [=]
-name {
-char
-}+
+name {char}+
 age {num}+
 %%
 {name} { yylval.p = strdup(yytext);
-
-return
- NAME; }
-{eq} { 
-return
- EQ; yylval.p = strdup(yytext);}
+ return NAME; }
+{eq} { return EQ; yylval.p = strdup(yytext);}
 {age}   {
-                yylval.value = strtol(yytext, 
-0
-, 
-10
-);
-
-return
- NUMBER;
+                yylval.value = strtol(yytext, 0, 10);
+                return NUMBER;
         }
 %%
-
-int
-yywrap
-()
-{
-
-return
-1
-;
+int yywrap(){
+  return 1;
 }
 %{
-
-#
-include
- "y.tab.h"
-#
-include
-<
-stdio.h
->
-#
-include
-<
-string.h
->
-
+        #include "y.tab.h"
+        #include <stdio.h>
+        #include <string.h>
 %}
-
-char
- [A-Za-z]
-num [
-0
--
-9
-]
+char [A-Za-z]
+num [0-9]
 eq [=]
-name {
-char
-}+
+name {char}+
 age {num}+
 %%
 {name} { yylval.p = strdup(yytext);
-
-return
- NAME; }
-{eq} { 
-return
- EQ; yylval.p = strdup(yytext);}
+ return NAME; }
+{eq} { return EQ; yylval.p = strdup(yytext);}
 {age}   {
-                yylval.value = strtol(yytext, 
-0
-, 
-10
-);
-
-return
- NUMBER;
+                yylval.value = strtol(yytext, 0, 10);
+                return NUMBER;
         }
 %%
-
-int
-yywrap
-()
-{
-
-return
-1
-;}
+int yywrap(){
+  return 1;}
 ```
 
 在lex和yacc文件中声明、定义函数；
