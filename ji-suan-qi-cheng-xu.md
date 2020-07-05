@@ -52,15 +52,11 @@ lex.yy.c        num.tab.c       num.y
 
 num.l           num.tab.h
 
+flex num.l
 
+bison -d  num.y
 
- flex num.l 
-
-  bison -d  num.y 
-
- gcc lex.yy.c -o n
-
-
+gcc lex.yy.c -o n
 
 ```
 $ gcc lex.yy.c -o n
@@ -73,10 +69,20 @@ Undefined symbols for architecture x86_64:
       _yylex in lex-501ddf.o
 ld: symbol(s) not found for architecture x86_64
 clang: error: linker command failed with exit code 1 (use -v to see invocation)
-
 ```
 
+$ gcc lex.yy.c -o n -v
 
+
+
+```
+End of search list.
+ "/Library/Developer/CommandLineTools/usr/bin/ld" -demangle -dynamic -arch x86_64 -macosx_version_min 10.11.0 -o n /var/folders/r9/35q9g3d56_d9g0v59w9x2l9w0000gn/T/lex-ae1cef.o -lSystem /Library/Developer/CommandLineTools/usr/bin/../lib/clang/8.0.0/lib/darwin/libclang_rt.osx.a
+Undefined symbols for architecture x86_64:
+  "_main", referenced from:
+     implicit entry/start for main executable
+
+```
 
 
 
