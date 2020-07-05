@@ -54,3 +54,29 @@ num.l           num.tab.h
 
 
 
+ flex num.l 
+
+  bison -d  num.y 
+
+ gcc lex.yy.c -o n
+
+
+
+```
+$ gcc lex.yy.c -o n
+Undefined symbols for architecture x86_64:
+  "_main", referenced from:
+     implicit entry/start for main executable
+  "_yylval", referenced from:
+      _yylex in lex-501ddf.o
+  "_yywrap", referenced from:
+      _yylex in lex-501ddf.o
+ld: symbol(s) not found for architecture x86_64
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+
+```
+
+
+
+
+
