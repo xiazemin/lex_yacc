@@ -6,4 +6,5 @@
 * [符号表](fu-hao-biao.md)
 * [Lex规范](lexgui-fan.md)
 * [正则表达式](zheng-ze-biao-da-shi.md)
+* [计算器程序](ji-suan-qi-cheng-xu.md)
 
