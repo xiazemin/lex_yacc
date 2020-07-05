@@ -74,7 +74,7 @@ return 1;
 }
 ```
 
-**    
+**      
 **
 
 **Lex 变量**
@@ -102,7 +102,7 @@ return 1;
 * yymore\(\)
    这一函数告诉 Lexer 将下一个标记附加到当前标记后。
 
-**    
+**      
 **
 
 个人使用心得：
@@ -123,7 +123,7 @@ return 1;
 > > >
 > > > UTF2    = %xC2-DF UTF0  --&gt; UTF2    \[\xC2-\xDF\]{UTF0}
 
-**    
+**      
 **
 
 **二、yacc\(Yet Another Compiler Compiler\)，是一个经典的生成语法分析器的工具**
@@ -142,6 +142,7 @@ return 1;
 * yacc 文件的第一部分定义了解析器将要处理和生成的对象。在一些情况下，它可以是空的， 但是更常见的是，它应该至少包含一些%token 指令。这些 指令用来定义 lexer 可以返回的记号。当使用 -d 选项来运行 yacc 时，它会生成一个定义常量的头文件。
 
 * %token --- terminate字符
+
 * %type  --- 非terminate字符
 * %union  --- 定义yystype
 * %left
@@ -158,59 +159,25 @@ _如果没有声明yylval，则采用默认值；_
 
 ```
 %{
-
-#
-include
- "y.tab.h"
-#
-include
-<
-stdio.h
->
-#
-include
-<
-string.h
->
-extern
-char
-* yylval;
+        #include "y.tab.h"
+        #include <stdio.h>
+        #include <string.h>
+        extern char* yylval;
 %}
-
-char
- [A-Za-z]
-num [
-0
--
-9
-]
+char [A-Za-z]
+num [0-9]
 eq [=]
-name {
-char
-}+
+name {char}+
 age {num}+
 %%
 {name} { yylval = strdup(yytext);
-
-return
- NAME; }
-{eq} { 
-return
- EQ; }
+ return NAME; }
+{eq} { return EQ; }
 {age} { yylval = strdup(yytext);
-
-return
- AGE;}
+return AGE;}
 %%
-
-int
-yywrap
-()
-{
-
-return
-1
-;
+int yywrap(){
+  return 1;
 }
 ```
 
@@ -218,7 +185,7 @@ return
 
 _要求%%，%{，%}必须顶格对齐_
 
-_当yacc发现一个解析错误，默认动作是调用yyerror    
+_当yacc发现一个解析错误，默认动作是调用yyerror      
 _
 
 _定义三个token，在lex中被return。_
@@ -430,10 +397,10 @@ printf
 
 _删除了yylval声明_
 
-_    
+_      
 _
 
-_    
+_      
 _
 
 ```
