@@ -125,8 +125,7 @@ gcc num.tab.c  lex.yy.c -o n
 $./n 
 12+123-10
 = 125
-
 ```
 
-
+[https://blog.csdn.net/fly\_yr/article/details/43014957?utm\_source=blogxgwz3](https://blog.csdn.net/fly_yr/article/details/43014957?utm_source=blogxgwz3)
 
