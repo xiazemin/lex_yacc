@@ -90,7 +90,11 @@ main函数定义在num.y里面
 $ gcc num.tab.c  -o n -v
 
 ```
-
+Undefined symbols for architecture x86_64:
+  "_yywrap", referenced from:
+      _yylex in num-10a7ac.o
+ld: symbol(s) not found for architecture x86_64
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
 ```
 
 
