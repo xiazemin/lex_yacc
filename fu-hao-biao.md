@@ -137,6 +137,27 @@ have: don't recognize
 
 fun: don't recognize
 
+
+
+```
+$./t
+did
+did: don't recognize
+verb
+did
+did: don't recognize
+verb is am
+  is
+is: verb
+noun dog cat
+  cat
+cat: noun
+i
+i: don't recognize
+
+
+```
+
 程序代码说明：
 
 在上述lex词法分析程序中，add\_word\(\)表示在符号表中放置一个新的单词；
