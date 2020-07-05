@@ -5,4 +5,5 @@
 * [第一个Lex程序](di-yi-ge-lex-cheng-xu.md)
 * [符号表](fu-hao-biao.md)
 * [Lex规范](lexgui-fan.md)
+* [正则表达式](zheng-ze-biao-da-shi.md)
 
