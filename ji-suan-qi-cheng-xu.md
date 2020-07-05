@@ -81,6 +81,10 @@ Undefined symbols for architecture x86_64:
      implicit entry/start for main executable
 ```
 
+原因
+
+main函数定义在num.y里面
+
 解决办法
 
 $ gcc num.tab.c  -o n -v
