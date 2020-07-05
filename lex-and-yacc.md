@@ -74,7 +74,7 @@ return 1;
 }
 ```
 
-**      
+**        
 **
 
 **Lex 变量**
@@ -102,7 +102,7 @@ return 1;
 * yymore\(\)
    这一函数告诉 Lexer 将下一个标记附加到当前标记后。
 
-**      
+**        
 **
 
 个人使用心得：
@@ -123,7 +123,7 @@ return 1;
 > > >
 > > > UTF2    = %xC2-DF UTF0  --&gt; UTF2    \[\xC2-\xDF\]{UTF0}
 
-**      
+**        
 **
 
 **二、yacc\(Yet Another Compiler Compiler\)，是一个经典的生成语法分析器的工具**
@@ -144,6 +144,7 @@ return 1;
 * %token --- terminate字符
 
 * %type  --- 非terminate字符
+
 * %union  --- 定义yystype
 * %left
 * %right
@@ -185,24 +186,15 @@ int yywrap(){
 
 _要求%%，%{，%}必须顶格对齐_
 
-_当yacc发现一个解析错误，默认动作是调用yyerror      
+_当yacc发现一个解析错误，默认动作是调用yyerror        
 _
 
 _定义三个token，在lex中被return。_
 
 ```
 %{
-
-typedef
-char
-* 
-string
-;
-
-#
-define
- YYSTYPE string
-
+       typedef char* string;
+        #define YYSTYPE string
 %}
         %token NAME EQ AGE
 %%
@@ -210,39 +202,16 @@ define
         | record
         ;
         record : NAME EQ AGE {
-
-printf
-(
-"%s is %s years old!!!\n"
-, $
-1
-, $
-3
-); }
+        printf("%s is %s years old!!!\n", $1, $3); }
 %%
-
-int
-main
-()
-{
+        int main()
+        {
         yyparse();
-
-return
-0
-;
+        return 0;
         }
-
-int
-yyerror
-(
-char
- *msg)
-{
-
-printf
-(
-"Error encountered: %s \n"
-, msg);}
+        int yyerror(char *msg)
+        {
+        printf("Error encountered: %s \n", msg);}
 ```
 
 ```
@@ -397,10 +366,10 @@ printf
 
 _删除了yylval声明_
 
-_      
+_        
 _
 
-_      
+_        
 _
 
 ```
