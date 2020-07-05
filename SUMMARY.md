@@ -14,4 +14,5 @@
 * [ANSI C Lex specification](ansi-c-lex-specification.md)
 * [ANSI C Yacc grammar](ansi-c-yacc-grammar.md)
 * [lex and yacc](lex-and-yacc.md)
+* [yacc概述](yaccgai-shu.md)
 
