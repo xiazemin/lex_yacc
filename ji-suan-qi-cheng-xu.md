@@ -99,5 +99,19 @@ clang: error: linker command failed with exit code 1 (use -v to see invocation)
 
 [https://www.it1352.com/784016.html](https://www.it1352.com/784016.html)
 
+[http://www.voidcn.com/article/p-tipaxawa-btn.html](http://www.voidcn.com/article/p-tipaxawa-btn.html)
+
+[https://westes.github.io/flex/manual/I-get-an-error-about-undefined-yywrap\_0028\_0029\_002e.html](https://westes.github.io/flex/manual/I-get-an-error-about-undefined-yywrap_0028_0029_002e.html)
+
+[https://westes.github.io/flex/manual/Generated-Scanner.html](https://westes.github.io/flex/manual/Generated-Scanner.html)
+
+在num.l增加
+
+```
+%option noyywrap
+```
+
+问题解决
+
 
 
