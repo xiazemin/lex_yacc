@@ -54,5 +54,25 @@ int yywrap()
 }
 ```
 
+yyleng\(\)
 
+只要是在扫描程序匹配标记时，标记的文本就被存储在以空字符终止的字符串yytext中，而它的长度存在yyleng中， yyleng\(\)返回的值与strlen\(yytext\)返回的值是相同的。
+
+
+
+yylex\(\)
+
+由lex创建的扫描程序有入口点yylex\(\)。调用yylex\(\)启动或重新开始扫描。如果lex动作执行将数值传递给调用程序的return，那么yylex\(\)的下次调用就从它停止的地方继续。
+
+
+
+yywrap\(\)
+
+当词法分析程序遇到文件结尾时，它调用例程yywrap\(\)来找出下一步要做什么，如果yywrap\(\)返回0，则扫描程序就继续扫描，如果返回1，则扫描程序就返回报告文件结尾的零标记。
+
+
+
+lex库中的yywrap\(\)的标准版本总是返回1，但是可以用自己的值来替代它，如果yywrap\(\)返回指示有更多输入的0，那么它首先需要调整指向新文件的yyin，可能需要使用fopen\(\)。
+
+[https://blog.csdn.net/fly\_yr/article/details/42969381](https://blog.csdn.net/fly_yr/article/details/42969381)
 
