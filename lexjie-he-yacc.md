@@ -37,3 +37,25 @@ Lex其实就是词法分析器，通过配置文件\*.l，依据正则表达式�
 
 [http://www.voidcn.com/article/p-skdphhhz-bbp.html](http://www.voidcn.com/article/p-skdphhhz-bbp.html)
 
+
+
+[http://www.voidcn.com/article/p-pejeuief-zg.html](http://www.voidcn.com/article/p-pejeuief-zg.html)
+
+Lex和Yacc学习过程中遇到的几个问题
+
+1.在Lex中表述空格，空格的表述得使用\[ \] 或者 " " ，不可以直接写空格，否则是匹配不了的。
+
+2.在同时使用Lex和Yacc的时候，如果我们不想编写main函数或者相关的配套函数，
+
+   例如Lex的yywrap，Yacc的yyerror等，我们可以直接使用Lex或者Yacc提供的链接库
+
+   -ll 和-ly ,但是特别要注意的是，此处特别要注意（这个问题查了我三四天的时间），一定要
+
+   将-ly 写在-ll的前面，因为-ly和-ll均实现并导出了main，而在使用的过程中如果-ll写在了前面
+
+   就会导致Yacc的执行根本就不会执行
+
+[http://www.voidcn.com/article/p-fgflomos-bqy.html](http://www.voidcn.com/article/p-fgflomos-bqy.html)
+
+[http://www.voidcn.com/article/p-ogikbtcy-tg.html](http://www.voidcn.com/article/p-ogikbtcy-tg.html)
+
