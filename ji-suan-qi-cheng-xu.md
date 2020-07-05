@@ -83,14 +83,10 @@ Undefined symbols for architecture x86_64:
 
 解决办法
 
+$ gcc num.tab.c  -o n -v
+
 ```
-%{
-#include <stdio.h>
-#include "lex.yy.c"
-int yyparse(void);
-int yyerror(const char* msg);
-int yywrap();
-}%
+
 ```
 
 
