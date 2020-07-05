@@ -127,17 +127,15 @@ $lex table.l
 
 $gcc -o t lex.yy.c
 
-$./t&lt;../exp1/example.txt 
+$./t&lt;../exp1/example.txt
 
 did: don't recognize
 
- I: don't recognize
+I: don't recognize
 
- have: don't recognize
+have: don't recognize
 
- fun: don't recognize
-
-
+fun: don't recognize
 
 程序代码说明：
 
@@ -148,4 +146,6 @@ lookup\_word\(\)表示查询已经输入的单词。
 在程序代码中，声明一个变量state，用来记录是在查找单词（状态LOOKUP）还是在声明它们（在这种情况下，state能记住我们正在声明的单词种类）。
 
 无论何时，只要我们看到以词性名字开始的行，就可以将状态设置为声明单词的种类；每次看到\n时就都切换回正常的查找状态。
+
+[https://blog.csdn.net/fly\_yr/article/details/42644501](https://blog.csdn.net/fly_yr/article/details/42644501)
 
