@@ -60,9 +60,9 @@ int yywrap()
 did I have fun?
 ```
 
- lex word.l 
+lex word.l
 
-  gcc -o w lex.yy.c 
+gcc -o w lex.yy.c
 
 ./w
 
@@ -74,5 +74,5 @@ have: is a verb
 
 fun: is not a verb
 
-
+[https://blog.csdn.net/fly\_yr/article/details/42643217?utm\_source=blogxgwz3](https://blog.csdn.net/fly_yr/article/details/42643217?utm_source=blogxgwz3)
 
