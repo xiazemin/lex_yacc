@@ -36,7 +36,6 @@ https://www.ibm.com/developerworks/cn/linux/l-lexyac.html
 https://github.com/chai2010/go-ast-book/blob/master/appendix/a-goyacc/readme.md
 
 
-{% raw %}
 yacc是用于构造编译器的工具，而goyacc是Go语言版本的yacc，是从早期的C语言版本yacc移植到Go语言的。早期的goyacc是Go语言标准命令之一，也是构建Go自身编译器的必备工具链之一，后来被逐步移出了内置工具。但是goyacc依然是一个开发语法分析器的利器。本章简单展示如何用goyacc构建一个命令行计算器小程序。
 
 A.1 计算器的特性
@@ -59,21 +58,21 @@ A.2 词法符号
 先创建tok.h文件，包含词法符号：
 
 enum {
-	ILLEGAL = 10000,
-	EOL = 10001,
+    ILLEGAL = 10000,
+    EOL = 10001,
 
-	ID = 258,
-	NUMBER = 259,
+    ID = 258,
+    NUMBER = 259,
 
-	ADD = 260, // +
-	SUB = 261, // -
-	MUL = 262, // *
-	DIV = 263, // /
-	ABS = 264, // |
+    ADD = 260, // +
+    SUB = 261, // -
+    MUL = 262, // *
+    DIV = 263, // /
+    ABS = 264, // |
 
-	LPAREN = 265, // (
-	RPAREN = 266, // )
-	ASSIGN = 267, // =
+    LPAREN = 265, // (
+    RPAREN = 266, // )
+    ASSIGN = 267, // =
 };
 其中ILLEGAL表示不能识别的无效的符号，EOL表示行的结尾，其它的符号与字面含义相同。
 
@@ -138,38 +137,38 @@ import "C"
 type calcLex struct {}
 
 func newCalcLexer(data []byte) *calcLex {
-	p := new(calcLex)
-	C.yy_scan_bytes((*C.char)(C.CBytes(data)), C.yy_size_t(len(data)))
-	return p
+    p := new(calcLex)
+    C.yy_scan_bytes((*C.char)(C.CBytes(data)), C.yy_size_t(len(data)))
+    return p
 }
 
 func (p *calcLex) Lex(yylval *calcSymType) int {
-	var tok = C.yylex()
-	var yylineno = int(C.yylineno)
-	var yytext = C.GoString(C.yytext)
+    var tok = C.yylex()
+    var yylineno = int(C.yylineno)
+    var yytext = C.GoString(C.yytext)
 
-	switch tok {
-	case C.ID:
-		// yylval.id = yytext
-		return ID
+    switch tok {
+    case C.ID:
+        // yylval.id = yytext
+        return ID
 
-	case C.NUMBER:
-		//yylval.value, _ = strconv.Atoi(yytext)
-		return NUMBER
+    case C.NUMBER:
+        //yylval.value, _ = strconv.Atoi(yytext)
+        return NUMBER
 
-	case C.ADD:
-		return ADD
-	// ...
+    case C.ADD:
+        return ADD
+    // ...
 
-	case C.EOL:
-		return EOL
-	}
+    case C.EOL:
+        return EOL
+    }
 
-	if tok == C.ILLEGAL {
-		log.Printf("lex: ILLEGAL token, yytext = %q, yylineno = %d", yytext, yylineno)
-	}
+    if tok == C.ILLEGAL {
+        log.Printf("lex: ILLEGAL token, yytext = %q, yylineno = %d", yytext, yylineno)
+    }
 
-	return 0 // eof
+    return 0 // eof
 }
 新建的calcLex类型对应Go语言版本的词法分析器，底层工作通过CGO调用flex生成的C语言函数完成。首先newCalcLexer创建一个词法分析器，参数是要分析的数据，通过C.yy_scan_bytes函数调用表示从字符串解析记号。然后calcLex类型的Lex方法表示每次需要解析一个记号（暂时忽略方法的calcSymType参数），内部通过调用C.yylex()读取一个记号，同时记录行号和记号对应的字符串。最后将C语言的记号转为Go语言的记号值返回，比如C.ID对应Go语言的ID。
 
@@ -187,8 +186,8 @@ var idValueMap = map[string]int{}
 %}
 
 %union {
-	value int
-	id    string
+    value int
+    id    string
 }
 
 %type  <value> exp factor term
@@ -201,34 +200,34 @@ var idValueMap = map[string]int{}
 
 %%
 calclist
-	: // nothing
-	| calclist exp EOL {
-		idValueMap["_"] = $2
-		fmt.Printf("= %v\n", $2)
-	}
-	| calclist ID ASSIGN exp EOL {
-		idValueMap["_"] = $4
-		idValueMap[$2] = $4
-		fmt.Printf("= %v\n", $4)
-	}
-	;
+    : // nothing
+    | calclist exp EOL {
+        idValueMap["_"] = $2
+        fmt.Printf("= %v\n", $2)
+    }
+    | calclist ID ASSIGN exp EOL {
+        idValueMap["_"] = $4
+        idValueMap[$2] = $4
+        fmt.Printf("= %v\n", $4)
+    }
+    ;
 
 exp
-	: factor         { $$ = $1 }
-	| exp ADD factor { $$ = $1 + $3 }
-	| exp SUB factor { $$ = $1 - $3 }
-	;
+    : factor         { $$ = $1 }
+    | exp ADD factor { $$ = $1 + $3 }
+    | exp SUB factor { $$ = $1 - $3 }
+    ;
 
 factor
-	: term            { $$ = $1 }
-	| factor MUL term { $$ = $1 * $3 }
-	| factor DIV term { $$ = $1 / $3 }
-	;
+    : term            { $$ = $1 }
+    | factor MUL term { $$ = $1 * $3 }
+    | factor DIV term { $$ = $1 / $3 }
+    ;
 
 term
-	: NUMBER            { $$ = $1 }
-	| ID                { $$ = idValueMap[$1] }
-	;
+    : NUMBER            { $$ = $1 }
+    | ID                { $$ = idValueMap[$1] }
+    ;
 
 %%
 和flex工具类型，首先在%{和%}中间是原生的Go语言代码。然后%union定义了属性值，用于记录语法解析中每个规则额外的属性值。通过%type定义BNF规则中非终结的名字，%token定义终结记号名字（和flex定义的记号类型是一致的）。而%type和%token就可以通过<value>或<id>的可选语法，将后面的名字绑定到属性。就是后续代码中$$对应的属性，比如%token <id> ID表示ID对应的属性为id，因此在后面的ID { $$ = idValueMap[$1] }表示数值id属性的值，其中idValueMap用于管理变量的值。
@@ -241,20 +240,20 @@ $ goyacc -o calc.y.go -p "calc" calc.y
 在绑定了属性之后，还需要继续完善Lex词法函数的代码：
 
 func (p *calcLex) Lex(yylval *calcSymType) int {
-	var tok = C.yylex()
-	var yylineno = int(C.yylineno)
-	var yytext = C.GoString(C.yytext)
+    var tok = C.yylex()
+    var yylineno = int(C.yylineno)
+    var yytext = C.GoString(C.yytext)
 
-	switch tok {
-	case C.ID:
-		yylval.id = yytext
-		return ID
+    switch tok {
+    case C.ID:
+        yylval.id = yytext
+        return ID
 
-	case C.NUMBER:
-		yylval.value, _ = strconv.Atoi(yytext)
-		return NUMBER
+    case C.NUMBER:
+        yylval.value, _ = strconv.Atoi(yytext)
+        return NUMBER
 
-	...
+    ...
 }
 其中yylval.id = yytext表示词法将解析得到的变量名字填充到id属性中。而数字部分则是通过yylval.value属性保存。
 
@@ -262,7 +261,7 @@ A.6 运行计算器
 创建main函数：
 
 func main() {
-	calcParse(newCalcLexer([]byte("1+2*3")))
+    calcParse(newCalcLexer([]byte("1+2*3")))
 }
 newCalcLexer构造一个词法解析器，然后calcParse语法解析器将从词法解析器依次读取记号并解析语法，在解析语法的同时将进行表达式求值运算，同时更新idValueMap全局的变量
 ```
